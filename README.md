@@ -35,7 +35,7 @@ Factored and GDELT teams.
 ## Data sources:
 
 * GDELT 1.0 GKG Data
-* GDELT 1.0 Events Data:
+* GDELT 1.0 Events Data
 
 
 
