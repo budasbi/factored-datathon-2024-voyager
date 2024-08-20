@@ -30,9 +30,12 @@ Factored and GDELT teams.
 
 ## Commited time:
 
-14 days
+14 days [Aug/12-25/2024]
 
+## Data sources:
 
+* GDELT 1.0 GKG Data
+* GDELT 1.0 Events Data:
 
 
 
