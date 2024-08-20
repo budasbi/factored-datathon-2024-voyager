@@ -6,7 +6,7 @@ import zipfile
 import io
 import logging
 
-S3_BUCKET_NAME = 'factored-datathon-2024-voyager-tests'  
+S3_BUCKET_NAME = 'factored-datathon-2024-voyager'  
 AWS_REGION = 'us-east-1'   
 EVENTS_URL = "https://data.gdeltproject.org/events/index.html"
 GKG_URL = "https://data.gdeltproject.org/gkg/index.html"
