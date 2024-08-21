@@ -15,3 +15,11 @@ resource "aws_s3_object" "upload_ingest_data_script"{
     depends_on = [ aws_s3_bucket.data_challenge_bucket ]
 
 }
+
+resource "aws_s3_object" "upload_transform_events_script"{
+    bucket = "${var.bucket_name}"
+    key = var.ingest_data_s3_script_key
+    source = "../scripts/glue_jobs/transform_events.py.py"
+    depends_on = [ aws_s3_bucket.data_challenge_bucket ]
+
+}
