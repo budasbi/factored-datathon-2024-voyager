@@ -14,7 +14,6 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
-parquet_path = '/home/oscar/budasbi-repos/factored-datathon-2024-voyager/parquet/'
 # Script generated for node Amazon S3
 gkgcounts = glueContext.create_dynamic_frame.from_options(format_options={"quoteChar": "\"", "withHeader": False, "separator": "\t", "optimizePerformance": False}, 
                                                           connection_type="s3", format="csv", connection_options={"paths": ["s3://factored-datathon-2024-voyager/raw/gkg_counts/"], 

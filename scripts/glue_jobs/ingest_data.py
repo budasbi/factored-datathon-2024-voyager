@@ -5,6 +5,7 @@ import boto3
 import zipfile
 import io
 import logging
+import gc
 
 S3_BUCKET_NAME = 'factored-datathon-2024-voyager'  
 AWS_REGION = 'us-east-1'   
@@ -34,6 +35,7 @@ def get_file_list_from_url(url, filetype):
             raise Exception('wrong filetype')
         filter_by_filetype = [file for file in filtered_by_date if keyword in file]
         link_list = list(map(lambda x: url.replace('index.html','')+x, filter_by_filetype  ))
+        gc.collect()
         return link_list
 
     else:
@@ -60,12 +62,14 @@ def download_unzip_save_file(file_url,filetype):
             # session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
             s3 = boto3.client('s3', region_name=AWS_REGION)
             s3.upload_fileobj(Fileobj = unzipped_file, Bucket =S3_BUCKET_NAME, Key =defined_key)
+    gc.collect()
 
 def ingest_events(filetype='events'):
     try:
         link_list = get_file_list_from_url(EVENTS_URL, filetype)
         for file in link_list:
             download_unzip_save_file(file,filetype)
+            gc.collect()
     except Exception:
         logger.info('Something Happened when ingest_events() executed')
 
@@ -74,6 +78,7 @@ def ingest_gkgs(filetype):
         link_list = get_file_list_from_url(GKG_URL,filetype)
         for file in link_list:
             download_unzip_save_file(file,filetype)
+            gc.collect()
     except Exception:
         logger.info('Something Happened when ingest_events() executed')
     

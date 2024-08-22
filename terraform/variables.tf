@@ -24,3 +24,24 @@ variable "bucket_name" {
 variable "ingest_data_s3_script_key" {
   default = "scripts/ingest_data.py"
 }
+
+variable "transform_events_script_key" {
+  default = "scripts/transform_events.py"
+}
+
+variable "transform_gkgcounts_script_key" {
+  default = "scripts/transform_gkgcounts.py"
+}
+
+
+variable "REDSHIFT_PASSWORD" {
+  type        = string
+  description = "database password"
+  sensitive   = true
+}
+
+variable "REDSHIFT_USERNAME" {
+  type        = string
+  description = "database user"
+  sensitive   = false
+}
