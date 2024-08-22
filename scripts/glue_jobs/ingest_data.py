@@ -10,9 +10,7 @@ S3_BUCKET_NAME = 'factored-datathon-2024-voyager'
 AWS_REGION = 'us-east-1'   
 EVENTS_URL = "https://data.gdeltproject.org/events/index.html"
 GKG_URL = "https://data.gdeltproject.org/gkg/index.html"
-# AWS_ACCESS_KEY = "AKIAU6GDYDIQTM4XVCB6"
-# AWS_SECRET_KEY = "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"
-MINIMUM_DATE = 20240801#20230812cloud
+MINIMUM_DATE = 20230812# locally20240801#
 
 logger = logging.getLogger('ingest_data')
 logging.basicConfig( level=logging.INFO)
