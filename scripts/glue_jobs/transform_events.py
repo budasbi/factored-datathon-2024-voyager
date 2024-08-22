@@ -15,7 +15,7 @@ job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
 # Script generated for node Amazon S3
-events = glueContext.create_dynamic_frame.from_options(format_options={"quoteChar": "\"", "withHeader": False, "separator": "\t", "optimizePerformance": False}, connection_type="s3", format="csv", connection_options={"paths": ["s3://factored-datathon-2024-voyager/raw/events/"], "recurse": True}, transformation_ctx="AmazonS3_node1723758147477")
+events = glueContext.create_dynamic_frame.from_options(format_options={"quoteChar": "\"", "withHeader": False, "separator": "\t", "optimizePerformance": False}, connection_type="s3", format="csv", connection_options={"paths": ["s3://factored-datathon-2024-voyager/raw/events/"], "recurse": True}, transformation_ctx="events")
 
 
 
