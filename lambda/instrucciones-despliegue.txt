@@ -1,0 +1,25 @@
+#INSTRUCCIONES PARA DESPLIEGUE BASADAS EN 
+# Para Referencia: https://lesliemwubbel.com/setting-up-a-flask-app-and-deploying-it-via-google-cloud/
+#0. Buscar en google el instalador de python 3, descargarlo e instalarlo y asegurarse que se añada a a la variable 
+#2 Crear ambiente virtual ejecutando python3 -m pip install --user virtualenv
+#3 moverse al ambiente virtual python -m venv env
+#4 activar ambiente virtual .\env\Scripts\activate
+#5 instalar flask ejecutando pip install Flask
+#6 ejecutar pip install python-dotenv
+#7 ejecutar pip install Flask-CORS
+#9 crear archivo de requerimientos que contiene librerias y versiones
+#9 pip freeze > requirements.txt
+#10 Crear cuenta en Google Cloud Platform
+#11 Crear un nuevo proyecto en google cloud platform
+#12 Ir a google cloud CLI or SDK para instalar google SDK
+#13 dar click al ejecutable 
+#14 se abrira shell para continuar ingresando informacion y autenticarse
+#15 ejecutar gcloud help, si sale error hay que agregar SDK a la variable Path de Environmental variables
+#16 reiniciar vscode
+#17 ejecutar gcloud init
+#18 Seleccionar opcion 2
+#19 Seleccionar email
+#20 Seleccionar proyecto creado en google cloud
+#21 gcloud run deploy --source .
+#22 seleccionar region, en nuestro caso seleccionamos la 33
+#23 si el despliegue es exitoso aparecera la url
