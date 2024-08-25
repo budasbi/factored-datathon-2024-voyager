@@ -1,0 +1,5 @@
+CREATE EXTERNAL SCHEMA parquet_external_schema
+FROM DATA CATALOG
+DATABASE 'voyager_lake'
+IAM_ROLE 'arn:aws:iam::975691492030:role/redshift_role'
+CREATE EXTERNAL DATABASE IF NOT EXISTS;
