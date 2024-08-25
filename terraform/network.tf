@@ -16,6 +16,7 @@ resource "aws_subnet" "public_subnet_a" {
   tags = {
     Name = var.default_tag
   }
+  depends_on = [ aws_vpc.voyager_vpc ]
 }
 
 resource "aws_subnet" "public_subnet_b" {
@@ -25,6 +26,7 @@ resource "aws_subnet" "public_subnet_b" {
   tags = {
     Name = var.default_tag
   }
+  depends_on = [ aws_vpc.voyager_vpc ]
 }
 
 resource "aws_subnet" "private_subnet_a" {
@@ -34,6 +36,7 @@ resource "aws_subnet" "private_subnet_a" {
   tags = {
     Name = var.default_tag
   }
+  depends_on = [ aws_vpc.voyager_vpc ]
 }
 resource "aws_subnet" "private_subnet_b" {
   vpc_id            = aws_vpc.voyager_vpc.id
@@ -42,6 +45,7 @@ resource "aws_subnet" "private_subnet_b" {
   tags = {
     Name = var.default_tag
   }
+  depends_on = [ aws_vpc.voyager_vpc ]
 }
 
 resource "aws_internet_gateway" "igw_redshift" {
@@ -50,11 +54,25 @@ resource "aws_internet_gateway" "igw_redshift" {
   tags = {
     Name = var.default_tag
   }
+  
 }
 
 
+
+resource "aws_redshift_subnet_group" "redshift_subnet_group_2" {
+  name       = "redshift-subnet-group-2"
+  subnet_ids = [aws_subnet.public_subnet_a.id, aws_subnet.public_subnet_b.id, aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
+
+  tags = {
+    Name = var.default_tag
+  }
+}
+
+
+
+
+
 resource "aws_security_group" "redshift_sg" {
-  // Create a security group
   name_prefix = "redshift_sg"
 
   vpc_id = aws_vpc.voyager_vpc.id
@@ -83,10 +101,15 @@ resource "aws_security_group" "redshift_sg" {
   tags = {
     Name = var.default_tag
   }
+   egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 
-# Creación de una tabla de rutas
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.voyager_vpc.id
   tags = {
@@ -94,7 +117,6 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-# Asociar el Internet Gateway a la tabla de rutas
 resource "aws_route" "internet_access" {
   route_table_id         = aws_route_table.public_route_table.id
   destination_cidr_block = "0.0.0.0/0"
@@ -102,7 +124,7 @@ resource "aws_route" "internet_access" {
 
 }
 
-# Asociación de la subred pública con la tabla de rutas
+
 resource "aws_route_table_association" "public_subnet_association_a" {
   subnet_id      = aws_subnet.public_subnet_a.id
   route_table_id = aws_route_table.public_route_table.id
