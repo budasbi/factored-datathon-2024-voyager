@@ -37,6 +37,20 @@ Factored and GDELT teams.
 * GDELT 1.0 GKG Data
 * GDELT 1.0 Events Data
 
+## Infraestructure
+Data Infraestructure was deployed using terraform and AWS as cloud provider.
+Services used:
+VPC
+Subnet
+Security Groups
+S3
+Glue Data Catalog
+Glue ETL (Apache Spark and Python Shell)
+Redshift
+IAM Roles
+
+![alt text](image.png)
+
 
 
 
