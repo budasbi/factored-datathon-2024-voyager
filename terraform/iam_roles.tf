@@ -36,38 +36,60 @@ resource "aws_iam_role_policy_attachment" "redshift_s3_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "redshift_redshift_policy_attachment" {
+  role       = aws_iam_role.redshift_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRedshiftAllCommandsFullAccess"
+}
+
+
+resource "aws_iam_role_policy_attachment" "redshift_glue_service_policy_attachment" {
+  role       = aws_iam_role.redshift_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSGlueServiceRole"
+}
+
+resource "aws_iam_role_policy_attachment" "schema_policy" {
+  role       = aws_iam_role.glue_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSGlueSchemaRegistryFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "console_policy" {
+  role       = aws_iam_role.glue_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "data_catalog_policy" {
+  role       = aws_iam_role.glue_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceNotebookRole"
+}
 
 resource "aws_iam_role_policy_attachment" "glue_service_policy" {
   role       = aws_iam_role.glue_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
 
-
-# customized s3 policy
-resource "aws_iam_policy" "s3_full_access_policy" {
-  name        = "s3_full_access_policy"
-  description = "Policy to access s3 files stored in bucket"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Action = [
-        "s3:ListBucket",
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject"
-      ]
-      Effect = "Allow"
-      Resource = [
-        "arn:aws:s3:::${var.bucket_name}",
-        "arn:aws:s3:::${var.bucket_name}/*"
-      ]
-    }]
-  })
-}
-
-#Attach newly created s3 policy to role
 resource "aws_iam_role_policy_attachment" "s3_full_access_policy_attachment" {
   role       = aws_iam_role.glue_role.name
-  policy_arn = aws_iam_policy.s3_full_access_policy.arn
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
+
+
+resource "aws_iam_policy" "passrolw" {
+  name        = "passrolw"  
+  description = "Allow Pass role"
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+       {
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "arn:aws:iam::975691492030:role/aws_glue_role"
+        }
+    ]
+  })
+}
+resource "aws_iam_role_policy_attachment" "passrolw_policy_attachment" {
+  role       = aws_iam_role.glue_role.name
+  policy_arn = aws_iam_policy.passrolw.arn
+}
+
