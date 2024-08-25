@@ -51,6 +51,8 @@ IAM Roles
 
 ![alt text](image.png)
 
-
+## Resources
+Country codes were taken from: https://github.com/gdelt/gdelt.github.io/blob/master/data/LOOKUP-COUNTRIES.json
+Cameo Codes were taken from: http://data.gdeltproject.org/documentation/CAMEO.Manual.1.1b3.pdf
 
 
