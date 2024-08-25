@@ -33,6 +33,13 @@ variable "transform_gkgcounts_script_key" {
   default = "scripts/transform_gkgcounts.py"
 }
 
+variable "load_country_codes_key" {
+  default = "docs/country_list.csv"
+}
+
+variable "load_cameo_codes_key" {
+  default = "docs/cameo_codes.csv.csv"
+}
 
 variable "REDSHIFT_PASSWORD" {
   type        = string
