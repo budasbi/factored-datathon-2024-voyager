@@ -6,7 +6,7 @@ import zipfile
 import io
 import logging
 import gc
-import os
+import pandas as pd
 
 S3_BUCKET_NAME = 'factored-datathon-2024-voyager-temp'   
 print(S3_BUCKET_NAME)
