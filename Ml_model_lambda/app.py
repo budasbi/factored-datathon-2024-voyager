@@ -2,7 +2,7 @@ from flask import Flask,request,jsonify, abort
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
-
+import pickle
 
 
 # Crear una instancia de la aplicación Flask
@@ -13,9 +13,14 @@ CORS(app)
 load_dotenv()
 # Configurar la aplicación para ejecutar en modo de depuración según la variable de entorno
 app.config['DEBUG']=os.environ.get('FLASK_DEBUG')
+MODEL_PATH = 'Ml_model_lambda/voyager_model.pkl'
 
 # Función de procesamiento de texto con spaCy
 def nlp(text):
+    with open(MODEL_PATH, 'rb') as file:
+        loaded_model = pickle.load(file)
+    # Use the loaded model to make predictions
+        predictions = loaded_model.predict(text)
     riskResults=[]
     riskResults.append({'risk':'high risk','message':'datathon'})
     return list(riskResults)
