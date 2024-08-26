@@ -56,3 +56,16 @@ Country codes were taken from: https://github.com/gdelt/gdelt.github.io/blob/mas
 Cameo Codes were taken from: http://data.gdeltproject.org/documentation/CAMEO.Manual.1.1b3.pdf
 
 
+## Model Prototyping
+To test the model, we utilized Gradio with the script located at /Ml_model_lambda/gradio_test_model.py.
+
+We generated the following link for access: https://0553cda380ccd280c7.gradio.live. This link will remain active for 72 hours.
+
+The model accepts 9 parameters, which represent the following:
+
+![alt text](image-1.png)
+
+in the gradio interface we need to the 9 comma-separated parameters and the output is the risk index
+
+
+
